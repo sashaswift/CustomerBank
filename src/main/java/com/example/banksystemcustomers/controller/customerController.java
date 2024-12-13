@@ -67,6 +67,7 @@ public class customerController {
     @GetMapping("/loggingtestify")
     public Result loggingtestify(String id,String passwd){
         //personalID or employeeID,用来获取员工的个人信息
+
         List<CustomerInformation> customerInformations=customerMapper.getByidAndPwd(id,passwd);
         //List<CustomerInformation> customerInformations=poiCustomerService.getByidAndPwd(id,passwd);
         List<CustomerVo> customerVos=new ArrayList<>();
@@ -112,6 +113,7 @@ public class customerController {
         List<AccountInformation> accountInformations=accountMapper.GetByIDAndPwd(cardid,cardpasswd);
         List<AccountVo> accountVos=new ArrayList<>();
         for(AccountInformation accountInformation:accountInformations){
+            if(!accountInformation.accountstate.equals("正常")) Result.fail("该卡已注销或冻结，无法使用");
             AccountVo accountVo=new AccountVo();
             BeanUtils.copyProperties(accountInformation,accountVo);
             accountVos.add(accountVo);
