@@ -11,6 +11,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -49,6 +50,18 @@ public class customerController {
 
     @Autowired
     private IPoiTransactionService poiTransactionService;
+
+    @GetMapping("/getmycards")
+    public Result GetMyCards(String personid){
+        List<AccountInformation> accountInformations=accountMapper.GetByPersonID(personid);
+        List<AccountVo> accountVos=new ArrayList<>();
+        for(AccountInformation accountInformation:accountInformations){
+            AccountVo accountVo=new AccountVo();
+            BeanUtils.copyProperties(accountInformation,accountVo);
+            accountVos.add(accountVo);
+        }
+        return Result.success(accountVos);
+    }
 
     @GetMapping("/getmyinformation")
     public Result GetMyInformation( String id ){
@@ -188,7 +201,7 @@ public class customerController {
         }else{
             //poiDepositService.save(depositinformationuser);
             //depositMapper.AddDeposit(depositinformationuser);
-            depositMapper.AddDeposit(depositid,depositinformationuser.cardid,depositinformationuser.depositbalance);
+            depositMapper.AddDeposit(depositinformationuser.depositid,depositinformationuser.cardid,depositinformationuser.depositbalance);
         }
         //depositMapper.AddDeposit(depositinformationuser);
         List <DepositInformationUser> depositInformationUsers=depositMapper.GetByIdAndKinds(depositinformationuser.cardid,"活期存款");

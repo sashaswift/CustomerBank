@@ -6,6 +6,10 @@
         SELECT * from Card where cardid=#{cardid}
     </select>
 
+    <select id="GetByPersonID" resultType="com.example.banksystemcustomers.conService.AccountInformation">
+        SELECT * FROM Card where personid=#{personid}
+    </select>
+
     <select id="GetByIDAndPwd" resultType="com.example.banksystemcustomers.conService.AccountInformation">
         SELECT * from Card where cardid=#{cardid} and cardpasswd=#{cardpasswd}
     </select>

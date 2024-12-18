@@ -10,3 +10,13 @@ spring:
 
 server:
   port: 8082
+
+app:
+  # 备份配置
+  backup:
+    # 备份数据库
+    db: "DBBS"
+    # 备份文件存储目录
+    dir: "D:\\backupDatabase"
+    # 备份文件最多保留时间。如，5分钟：5m、12小时：12h、1天：1d
+    max-age: 1d
