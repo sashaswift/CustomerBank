@@ -24,7 +24,8 @@
     </select>
 
     <select id="UpdateDepositAdd" statementType="CALLABLE">
-        {CALL Transaction1(#{vdepositid, mode=IN, jdbcType=CHAR, javaType=java.lang.String},#{vcardid, mode=IN, jdbcType=CHAR, javaType=java.lang.String}, #{vamount, mode=IN, jdbcType=DECIMAL, javaType=java.math.BigDecimal})}
+        {CALL Transaction1(#{vdepositid, mode=IN, jdbcType=CHAR, javaType=java.lang.String},
+            #{vcardid, mode=IN, jdbcType=CHAR, javaType=java.lang.String}, #{vamount, mode=IN, jdbcType=DECIMAL, javaType=java.math.BigDecimal})}
     </select>
 
     <select id="UpdateDepositWith" statementType="CALLABLE">
