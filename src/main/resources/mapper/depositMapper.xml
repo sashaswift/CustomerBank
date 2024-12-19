@@ -7,7 +7,8 @@
     </select>
 
     <select id="GetByIdAndKinds" resultType="com.example.banksystemcustomers.conService.DepositInformationUser">
-        SELECT * from Depositcard where cardid=#{cardid} and depositid IN (SELECT depositid from Depositmanage where remark=#{remark})
+        SELECT * from Depositcard where cardid=#{cardid} and depositid
+        IN (SELECT depositid from Depositmanage where remark=#{remark})
     </select>
 
     <select id="GetAllKinds" resultType="com.example.banksystemcustomers.conService.DepositInformationUser">

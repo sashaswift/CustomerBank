@@ -69,6 +69,7 @@ public class customerController {
         List<CustomerInformation> customerInformations=customerMapper.getById(id);
         //List<CustomerInformation> customerInformations=poiCustomerService.getById(employeeid);
         List<CustomerVo> customerVos=new ArrayList<>();
+        if(customerInformations.isEmpty()) return Result.fail("账号或密码错误");
         for(CustomerInformation customerInformation:customerInformations){
             CustomerVo customerVo=new CustomerVo();
             BeanUtils.copyProperties(customerInformation,customerVo);
@@ -84,6 +85,7 @@ public class customerController {
         List<CustomerInformation> customerInformations=customerMapper.getByidAndPwd(id,passwd);
         //List<CustomerInformation> customerInformations=poiCustomerService.getByidAndPwd(id,passwd);
         List<CustomerVo> customerVos=new ArrayList<>();
+        if(customerInformations.isEmpty()) return Result.fail("账号或密码错误");
         for(CustomerInformation customerInformation:customerInformations){
             CustomerVo customerVo=new CustomerVo();
             BeanUtils.copyProperties(customerInformation,customerVo);
@@ -125,6 +127,7 @@ public class customerController {
         //根据账户和密码来确定是否满足用户信息，并且返回相应的用户信息
         List<AccountInformation> accountInformations=accountMapper.GetByIDAndPwd(cardid,cardpasswd);
         List<AccountVo> accountVos=new ArrayList<>();
+        if(accountInformations.isEmpty()) return Result.fail("账号或密码错误");
         for(AccountInformation accountInformation:accountInformations){
             if(!accountInformation.accountstate.equals("正常")) return Result.fail("该卡已注销或冻结，无法使用");
             AccountVo accountVo=new AccountVo();
